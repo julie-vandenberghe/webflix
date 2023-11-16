@@ -33,6 +33,10 @@ class AboutController extends Controller
     }
 
     public function show($user) {
+
+        if(! in_array($user, ['Julie', 'Angèle', 'Loki'])) {
+            abort(404); // Renvoie une 404
+        }
    
         return view('about-show', [
             'user' => $user,
