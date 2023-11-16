@@ -3,11 +3,12 @@
 @section('content') {{-- ici remettre le nom dans @yield dans le fichier app --}}
 <h1>À propos de {{ $title }}</h1>
 
-@dump($maVariable)
-
 <ul>
 @foreach ($team as $member)
-    <li>{{ $member['prenom'] . ' ' . $peopleDev['nom'] . ' : ' . $peopleDev['fonction']}}</li>  
+    <li>{{ $member['prenom'] . ' ' . $member['nom'] . ' : ' . $member['fonction']}}
+    
+    <img src="{{ $member['image'] }}" alt="">
+    </li>  
 @endforeach
 </ul>
 
