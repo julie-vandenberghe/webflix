@@ -48,9 +48,9 @@ Route::get('/a-propos', function () {
     return view('about', [
         'title' => 'Webflix',
         'team' => [
-            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/100?u=julie'],
-            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/100?u=angele'],
-            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur', 'image' => 'https://i.pravatar.cc/100?u=loki'],
+            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/75?u=julie'],
+            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/75?u=angele'],
+            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur', 'image' => 'https://i.pravatar.cc/75?u=loki'],
         ]
     ]);
 });
