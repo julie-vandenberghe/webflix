@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +30,15 @@ Route::get('/', function () {
 // {friend} = paramétre obligatoire
 // {friend?} = paramètre optionnel. Du coup, mettre $friend = null pour permettre que qd pas de paramètre, pas d'erreur.
 
-Route::get('/julie/{friend?}', function ($friend = null) {
+Route::get('/julie/{friend?}', function (Request $request, $friend = null) {
+
+    dump($request->color); //mm chose que $_GET['color'] ?? null;
+    //dump($request('color')); //mm chose que $_GET['color'] ?? null;
+
     return view('presentation', [
         'age' => Carbon::parse('1989-12-05')->age,
-        'friend' => ucfirst($friend) // ucfirst permet d'avoir 1re lettre en majuscule
+        'friend' => ucfirst($friend), // ucfirst permet d'avoir 1re lettre en majuscule
+        'color' => $request->color,
     ]);
+    
 });
