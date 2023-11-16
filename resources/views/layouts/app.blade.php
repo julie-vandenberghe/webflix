@@ -6,7 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <a href="/">Accueil</a>
+        <a href="/julie">Présentation</a>
+        <a href="/julie?color=blue">Julie Bleue</a>
+        <a href="/julie/angèle">Julie et Angèle</a>
+        <a href="/julie/loki🐱">Julie et Loki 🐱</a>
+    </nav>   
+
+
+
     @yield('content')
-    <footer>Webflix &copy; {{date{'Y'}}} </footer>
+    <footer>Webflix &copy; {{date ('Y') }} </footer>
 </body>
 </html>
