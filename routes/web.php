@@ -42,3 +42,31 @@ Route::get('/julie/{friend?}', function (Request $request, $friend = null) {
     ]);
     
 });
+
+
+Route::get('/a-propos', function () {
+    return view('about', [
+        'title' => 'Webflix',
+        'team' => [
+            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/150?u=julie'],
+            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/150?u=angele'],
+            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur', 'image' => 'https://i.pravatar.cc/150?u=loki'],
+        ]
+    ]);
+});
+
+Route::get('/a-propos/{user?}', function (Request $request, $user = null) {
+
+    dump($request->user);
+
+    return view('about', [
+        'name' => 'À propos de notre équipe de développeurs',
+        'teamDev' => [
+            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse'],
+            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse'],
+            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur'],
+        ],
+        'user' => $request->user,
+    ]);
+});
+

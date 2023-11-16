@@ -8,6 +8,8 @@
 <body>
     <nav>
         <a href="/">Accueil</a>
+        <a href="/a-propos">À propos</a>
+        <a href="/a-propos?user=Julie">Julie as a user</a>
         <a href="/julie">Présentation</a>
         <a href="/julie?color=blue">Julie Bleue</a>
         <a href="/julie/angèle">Julie et Angèle</a>
