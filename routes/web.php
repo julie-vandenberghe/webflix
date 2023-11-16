@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'name' => 'Julie',
+        'games' => [
+            'Super Mario',
+            'Mario Kart',
+            'Mario Party',
+            'Mario Paint'
+        ]
+    ]);
 });
+
+
