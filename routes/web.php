@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,58 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        'name' => 'Julie',
-        'games' => [
-            'Super Mario',
-            'Mario Kart',
-            'Mario Party',
-            'Mario Paint'
-        ]
-    ]);
-});
+//Route sans Controller
+// Route::get('/', function () {
+//     return view('home', [
+//         'name' => 'Julie',
+//         'games' => [
+//             'Super Mario',
+//             'Mario Kart',
+//             'Mario Party',
+//             'Mario Paint'
+//         ]
+//     ]);
+// });
 
-// {friend} = paramétre obligatoire
-// {friend?} = paramètre optionnel. Du coup, mettre $friend = null pour permettre que qd pas de paramètre, pas d'erreur.
+//Route avec Controller
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/julie/{friend?}', function (Request $request, $friend = null) {
+//HomeController::class -> friend
+Route::get('/julie/{friend?}', [HomeController::class, 'friend']);
 
-    dump($request->color); //mm chose que $_GET['color'] ?? null;
-    //dump($request('color')); //mm chose que $_GET['color'] ?? null;
+//AboutController > index
+Route::get('/a-propos', [AboutController::class, 'index']);
 
-    return view('presentation', [
-        'age' => Carbon::parse('1989-12-05')->age,
-        'friend' => ucfirst($friend), // ucfirst permet d'avoir 1re lettre en majuscule
-        'color' => $request->color,
-    ]);
-    
-});
-
-
-Route::get('/a-propos', function () {
-    return view('about', [
-        'title' => 'Webflix',
-        'team' => [
-            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/75?u=julie'],
-            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse', 'image' => 'https://i.pravatar.cc/75?u=angele'],
-            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur', 'image' => 'https://i.pravatar.cc/75?u=loki'],
-        ]
-    ]);
-});
-
-Route::get('/a-propos/{user?}', function (Request $request, $user = null) {
-
-    dump($request->user);
-
-    return view('about', [
-        'name' => 'À propos de notre équipe de développeurs',
-        'teamDev' => [
-            ['prenom' => 'Julie', 'nom' => 'Vandenberghe', 'fonction' => 'développeuse'],
-            ['prenom' => 'Angèle', 'nom' => 'Despretz', 'fonction' => 'développeuse'],
-            ['prenom' => 'Loki', 'nom' => '🐱', 'fonction' => 'ronronneur'],
-        ],
-        'user' => $request->user,
-    ]);
-});
+//AboutController > show
+Route::get('/a-propos/{user}', [AboutController::class, 'show']);
 

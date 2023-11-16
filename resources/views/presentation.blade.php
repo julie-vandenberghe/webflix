@@ -2,7 +2,7 @@
 
 @section('content') {{-- ici remettre le nom dans @yield dans le fichier app --}}
 
-    <h1>Je me présente, je m'appelle Julie</h1>
+    <h1 class="mb-4 text-4xl font-extrabold">Je me présente, je m'appelle Julie</h1>
     <p>Tu as {{ $age }} ans.</p>
 
     @if ($age >= 18)
