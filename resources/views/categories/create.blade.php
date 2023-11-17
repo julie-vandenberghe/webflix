@@ -9,7 +9,7 @@
 
     <form action="" method="post">
         @csrf {{-- Anytime you define an HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware can validate the request.--}}
-        <input type="text" name="name">
+        <input type="text" name="name" value="{{ old('name') }}">
         <button>Sauvegarder</button>
     </form>
     
