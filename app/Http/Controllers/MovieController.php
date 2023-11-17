@@ -24,9 +24,11 @@ class MovieController extends Controller
         if(! in_array($id, $idFilm)) {
             abort(404); // Renvoie une 404
         }
+
+        $filmFound = Movie::find($id);
    
         return view('films/show', [
-            'film' => $id,
+            'film' => $filmFound->title,
         ]);
     }
 
