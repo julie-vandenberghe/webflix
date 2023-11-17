@@ -10,7 +10,12 @@ class CategoryController extends Controller
     //Ici, on affiche toutes les catégories. Pour cela, on retourne le modèle category
     public function index()
     {
-        return Category::all(); //Fait un SELECT * FROM categories ... en Laravel :o
+        //return Category::all(); //Fait un SELECT * FROM categories ... en Laravel :o
+        return view('categories/index', [
+            'categories' => Category::all(),
+        ]
+    
+    );
         
     }
 
