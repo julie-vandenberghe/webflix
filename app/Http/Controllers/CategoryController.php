@@ -34,7 +34,7 @@ class CategoryController extends Controller
         
         //Insertion en BDD
         $category = new Category();
-        $category->name = 'Action'; //Laravel crée lui-même un tableau avec les attributs et leurs valeurs via la class Category et le "use HasFactory;"
+        $category->name = $request->name; //Laravel crée lui-même un tableau avec les attributs et leurs valeurs via la class Category et le "use HasFactory;"
         $category->save(); //Fait un INSERT INTO categories en Laravel :o
 
         return redirect('/categories');

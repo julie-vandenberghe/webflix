@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MovieController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,9 @@ Route::get('/a-propos/{user}', [AboutController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/creer', [CategoryController::class, 'create']); // pour afficher le formulaire
 Route::post('/categories/creer', [CategoryController::class, 'store']); // pour traiter le formulaire
+
+//CRUD Movies
+Route::get('/films', [MovieController::class, 'index']);
+Route::get('/film/{id}', [MovieController::class, 'show']); //Attention, si met un 's' pasmoyen de sictinguer avec ligne du dessous et va croire que films/creer = films/{id}
+Route::get('/films/creer', [MovieController::class, 'create']); // pour afficher le formulaire
+Route::post('/films/creer', [MovieController::class, 'store']); // pour traiter le formulaire

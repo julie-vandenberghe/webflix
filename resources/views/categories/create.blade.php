@@ -4,7 +4,7 @@
 
     {{--Boucle pour afficher les erreurs. Laravel s'occupe même des messages (mais en anglais par contre) --}}
     @foreach ($errors->all() as $error)
-    {{ $ error}}
+    {{ $error}}
     @endforeach
 
     <form action="" method="post">

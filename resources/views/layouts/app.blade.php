@@ -15,7 +15,7 @@
           </a>
         <a href="/a-propos" class="block py-2 px-3 text-white bg-gray-700 rounded">À propos</a>
         <a href="/julie" class="block py-2 px-3 text-white bg-gray-700 rounded">Présentation</a>
-        <a href="/julie?color=blue" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie Bleue</a>
+        <a href="/films" class="block py-2 px-3 text-white bg-gray-700 rounded">Films</a>
         <a href="/julie/angèle" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Angèle</a>
         <a href="/julie/loki" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Loki 🐱</a>
         
