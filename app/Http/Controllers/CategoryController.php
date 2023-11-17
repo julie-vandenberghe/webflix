@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         //Vérification des données
         $request->validate([
-            'name' => 'required|min:3|unique:categories|max:10',
+            'name' => 'required|min:3|unique:categories|max:10|between:3,10',
             //nom = obligatoire, min 3 caractères, pas de doublon, maximum 10 caractères
         ]);
         
