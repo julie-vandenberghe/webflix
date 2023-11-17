@@ -2,6 +2,9 @@
 
 @section('content') 
 
+    <h1>Nos catégories</h1>
+    <a href="/categories/creer">Créer une catégorie</a>
+
     <div>
         @foreach ($categories as $category)
             <div>
