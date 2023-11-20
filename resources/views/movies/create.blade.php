@@ -15,26 +15,48 @@
         <div class="mb-4">
             <label for="title" class="block">Titre *</label>
             <input type="text" name="title" id="title" value="{{ old('title') }}" class="border-0 border-b focus:ring-0 w-full" >
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="synopsis" class="block">Synopsis *</label>
-            <input type="textarea" name="synopsis" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('synopsis') }}">
+            <textarea name="synopsis" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('synopsis') }}"></textarea>
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="duration" class="block">Duration *</label>
             <input type="text" name="duration" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('duration') }}">
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="youtube" class="block">Youtube</label>
             <input type="text" name="youtube" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('youtube') }}">
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="released_at" class="block">Released at</label>
             <input type="text" name="released_at" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('released_at') }}">
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-4">
-            <label for="category_id" class="block">Category</label>
-            <input type="text" name="category_id" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('category_id') }}">
+            <label for="category" class="block">Catégorie</label>
+            <select name="category" id="category" class="border-0 border-b border-gray-300 w-full">
+                @foreach ($categories as $category)
+                    <option @selected($category->id == old('category')) value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            @error('category')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
         <button>Sauvegarder</button>
     </form>
