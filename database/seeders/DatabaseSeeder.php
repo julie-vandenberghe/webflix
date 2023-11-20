@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $apiKey = '1acc688a333a713673ba5711f8f671d0';
         $baseUrl = 'https://api.themoviedb.org/3';
 
+        
         //Catégories
         // On fait une requête sur une API
         //withoutVerifying() > désactive le HTTPS sous WIndows 
@@ -42,17 +43,19 @@ class DatabaseSeeder extends Seeder
         $movies = Http::withoutVerifying()->get($baseUrl.'/movie/now_playing?language=fr-FR&api_key='.$apiKey)->json('results'); 
 
         foreach ($movies as $movie) {
-            $movies = Http::withoutVerifying()
+            $movie = Http::withoutVerifying()
             ->get($baseUrl. '/movie/'. $movie['id'] .'?language=fr-FR&append_to_response=videos&api_key='.$apiKey)
             ->json(); 
             //&append_to_response=videos > pour récupérer les liens Youtube
 
-            Movie::factort()->create([
+            Movie::factory()->create([
                 'title' => $movie['title'],
                 'synopsis' => $movie['overview'],
                 'duration' => $movie['runtime'],
                 'cover' => 'https://image.tmdb.org/t/p/w500'.$movie['poster_path'],
-                'released_at' => $movie['release_date'],
+                'released_at' => $movie['release_date'], 
+                'youtube' => $movie['videos']['results'][0]['key'] ?? null,
+                'category_id' => $movie['genres'][0]['id'] ?? null,
             ]);
 
         };

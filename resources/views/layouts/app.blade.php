@@ -14,8 +14,9 @@
               <span class="self-center text-2xl font-semibold whitespace-nowrap">Accueil</span>
           </a>
         <a href="/a-propos" class="block py-2 px-3 text-white bg-gray-700 rounded">À propos</a>
-        <a href="/julie" class="block py-2 px-3 text-white bg-gray-700 rounded">Présentation</a>
+        <a href="/categories" class="block py-2 px-3 text-white bg-gray-700 rounded" >Catégories</a>
         <a href="/films" class="block py-2 px-3 text-white bg-gray-700 rounded">Films</a>
+        <a href="/julie" class="block py-2 px-3 text-white bg-gray-700 rounded">Présentation</a>
         <a href="/julie/angèle" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Angèle</a>
         <a href="/julie/loki" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Loki 🐱</a>
         
