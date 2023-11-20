@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Movie;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        //SANS L'API
+        // Category::factory(10)->create();
+        // Category::factory()->create(['name' => 'Action']);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Movie::factory(100)->create(function() {
+        //     // Ici, c'est comme une boucle.
+        //     return [
+        //         'category_id' => rand(1, 10)];
+        // });
+
+        //AVEC L'API
+        $apiKey = '1acc688a333a713673ba5711f8f671d0';
+        $baseUrl = 'https://api.themoviedb.org/3';
+
+        //Catégories
+        // On fait une requête sur une API
+        //withoutVerifying() > désactive la 
+        $genres = Http::withoutVerifying()->get($baseUrl.'/genre/movie/list?language=fr-FR&api_key='.$apiKey)->json('genres'); 
+
+        Category::factory()->createMany($genres);
+
+      
     }
 }
