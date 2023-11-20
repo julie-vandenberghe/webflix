@@ -14,11 +14,11 @@
 
         <div class="mb-4">
             <label for="title" class="block">Titre *</label>
-            <input type="text" name="title" id="title" class="border-0 border-b focus:ring-0 w-full" value="{{ old('title') }}">
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="border-0 border-b focus:ring-0 w-full" >
         </div>
         <div class="mb-4">
             <label for="synopsis" class="block">Synopsis *</label>
-            <input type="text" name="synopsis" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('synopsis') }}">
+            <input type="textarea" name="synopsis" class="border-0 border-b focus:ring-0 w-full"  value="{{ old('synopsis') }}">
         </div>
         <div class="mb-4">
             <label for="duration" class="block">Duration *</label>

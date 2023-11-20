@@ -11,8 +11,8 @@ class MovieController extends Controller
     public function index()
     {
         //return Movie::all(); //Fait un SELECT * FROM movies ... en Laravel :o
-        return view('films/index', [
-            'films' => Movie::all(),
+        return view('movies/index', [
+            'films' => Movie::all(), //Afficher tous les films
         ]);
         
     }
@@ -25,31 +25,40 @@ class MovieController extends Controller
             abort(404); // Renvoie une 404
         }
 
-        $filmFound = Movie::find($id);
+        $filmFound = Movie::find($id); //Afficher 1 film
+
+        //Les lignes ci-dessus peuvent être remplacées par :
+        //$filmFound = Movie::findOrFail($id);
+        //Si on trouve l'id, on affecte le tableau à $filmFound, sinon on fait abort(404);
    
-        return view('films/show', [
-            'film' => $filmFound->title,
+        return view('movies/show', [
+            'title' => $filmFound->title,
+            'synopsis' => $filmFound->synopsis,
+            'duration' => $filmFound->duration,
+
         ]);
     }
 
     public function create()
     {
-        return view('films/create');
+        return view('movies/create');
     }
 
     public function store(Request $request)
     {
         //Vérification des données
         $request->validate([
-            'title' => 'required|min:2|unique:movies',
-            //title = obligatoire, min 2 caractères, pas de doublon
+            'title' => 'required|min:2',
+            //title = obligatoire, min 2 caractères
             'synopsis' => 'required|min:10',
-            'duration' => 'required',
+            'duration' => 'required|integer|min:1',
+            'released_at' => 'nullable|date', //par défaut = nullable, donc pas obligé de le préciser
+            'category' => 'nullable|exists:categories,id', //va vérifier que l'id dans categories existe
         ]);
         
         //Insertion en BDD
         $movie = new Movie();
-        $movie->title = $request->title;
+        $movie->title = $request->title; //title : on peut mettre à la place input('title', 'valeur par défaut')
         $movie->synopsis = $request->synopsis;
         $movie->duration = $request->duration;
         $movie->youtube = $request->youtube;

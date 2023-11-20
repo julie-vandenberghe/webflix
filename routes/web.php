@@ -50,6 +50,6 @@ Route::post('/categories/creer', [CategoryController::class, 'store']); // pour 
 
 //CRUD Movies
 Route::get('/films', [MovieController::class, 'index']);
-Route::get('/film/{id}', [MovieController::class, 'show']); //Attention, si met un 's' pasmoyen de sictinguer avec ligne du dessous et va croire que films/creer = films/{id}
+Route::get('/film/{id}', [MovieController::class, 'show']); //Attention, si met un 's' pas moyen de distinguer avec ligne du dessous et va croire que films/creer = films/{id} ou alors rajouter ->whereNumber('id) à la fin de la ligne)
 Route::get('/films/creer', [MovieController::class, 'create']); // pour afficher le formulaire
 Route::post('/films/creer', [MovieController::class, 'store']); // pour traiter le formulaire
