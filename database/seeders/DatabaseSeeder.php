@@ -32,11 +32,30 @@ class DatabaseSeeder extends Seeder
 
         //Catégories
         // On fait une requête sur une API
-        //withoutVerifying() > désactive la 
+        //withoutVerifying() > désactive le HTTPS sous WIndows 
         $genres = Http::withoutVerifying()->get($baseUrl.'/genre/movie/list?language=fr-FR&api_key='.$apiKey)->json('genres'); 
 
-        Category::factory()->createMany($genres);
+        Category::factory()->createMany($genres); //Ici on aurait aussi pu faire un "foreach". Tant qu'il y a des genres, cela va utiliser la factory pour les afficher 
 
+
+        //Films
+        $movies = Http::withoutVerifying()->get($baseUrl.'/movie/now_playing?language=fr-FR&api_key='.$apiKey)->json('results'); 
+
+        foreach ($movies as $movie) {
+            $movies = Http::withoutVerifying()
+            ->get($baseUrl. '/movie/'. $movie['id'] .'?language=fr-FR&append_to_response=videos&api_key='.$apiKey)
+            ->json(); 
+            //&append_to_response=videos > pour récupérer les liens Youtube
+
+            Movie::factort()->create([
+                'title' => $movie['title'],
+                'synopsis' => $movie['overview'],
+                'duration' => $movie['runtime'],
+                'cover' => 'https://image.tmdb.org/t/p/w500'.$movie['poster_path'],
+                'released_at' => $movie['release_date'],
+            ]);
+
+        };
       
     }
 }
