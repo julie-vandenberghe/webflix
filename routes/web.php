@@ -56,3 +56,7 @@ Route::post('/films/creer', [MovieController::class, 'store']); // pour traiter 
 Route::get('/film/{id}/modifier', [MovieController::class, 'edit']);
 Route::post('/film/{id}/modifier', [MovieController::class, 'update']);
 Route::get('/film/{id}/supprimer', [MovieController::class, 'destroy']);
+
+//Authentification
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate']);
