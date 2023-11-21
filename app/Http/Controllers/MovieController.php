@@ -81,4 +81,30 @@ class MovieController extends Controller
         ]);
 
     }
+
+    public function update(Request $request, $id)
+    {
+        //Vérification des données
+        $request->validate([
+            'title' => 'required|min:2',
+            'synopsis' => 'required|min:10',
+            'duration' => 'required|integer|min:1',
+            'released_at' => 'nullable|date', 
+            'category' => 'nullable|exists:categories,id', 
+        ]);
+        
+        //Insertion en BDD
+        $movie = Movie::findOrFail($id); //Ici on va modifier le film
+        $movie->title = $request->title; //title : on peut mettre à la place input('title', 'valeur par défaut')
+        $movie->synopsis = $request->synopsis;
+        $movie->duration = $request->duration;
+        $movie->youtube = $request->youtube;
+        $movie->cover = 'upload/julie.jpg';
+        $movie->released_at =  $request->released_at;
+        $movie->category_id =  $request->category_id;
+
+        $movie->save(); //Fait un INSERT INTO movies en Laravel :o
+
+        return redirect('/films');
+    }
 }
