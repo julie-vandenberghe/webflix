@@ -107,4 +107,11 @@ class MovieController extends Controller
 
         return redirect('/films');
     }
+
+    public function destroy($id)
+    {
+        Movie::destroy($id); //DELETE FROM movies WHERE id...
+ 
+        return redirect('/films');
+    }
 }
