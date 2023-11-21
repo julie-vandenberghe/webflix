@@ -13,7 +13,8 @@ class MovieController extends Controller
     {
         //return Movie::all(); //Fait un SELECT * FROM movies ... en Laravel :o
         return view('movies/index', [
-            'films' => Movie::all(), //Afficher tous les films
+            //'films' => Movie::all(), //Afficher tous les films 
+            'films' => Movie::with('category')->get(), //La ligne ci-dessus fonctionne aussi mais est moins optimisée
         ]);
         
     }

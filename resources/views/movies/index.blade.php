@@ -15,7 +15,9 @@
                 {{-- <p>{{ $movie->synopsis }}</p> --}}
                 <p>
                 @if ($movie->released_at)
-                {{ $movie->released_at }} | 
+                {{ $movie->released_at->diffForHumans()}} | 
+                {{-- Permet d'avoir 3 weeks ago --}}
+                {{ $movie->released_at->translatedFormat('d F Y') }} | 
                 @endif
                 @if ($movie->category_id)
                 {{ $movie->category_id }} | 
