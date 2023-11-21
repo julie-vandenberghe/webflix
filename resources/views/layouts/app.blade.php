@@ -19,7 +19,11 @@
         <a href="/julie" class="block py-2 px-3 text-white bg-gray-700 rounded">Présentation</a>
         <a href="/julie/angèle" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Angèle</a>
         <a href="/julie/loki" class="block py-2 px-3 text-white bg-gray-700 rounded">Julie et Loki 🐱</a>
-        
+        @auth {{-- Lorsqu'on est connecté... --}}
+            <a href="/logout">{{ Auth::user()->email }}</a>
+        @else    
+            <a class="block py-2 px-3 text-white bg-gray-700 rounded" href="/login">Connexion</a>
+        @endauth
     </nav>   
 
 

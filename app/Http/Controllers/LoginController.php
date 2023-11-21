@@ -21,19 +21,33 @@ class LoginController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email', 
+            'password' => 'required',
         ]);
  
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            $request->session()->regenerate(); // regénére la session (prévient des attaques par fixation de session)
  
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/films');
         }
  
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Identifiants incorrects.',
         ])->onlyInput('email');
+    }
+
+    /**
+    * Log the user out of the application.
+    */
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/films');
     }
 
 }
