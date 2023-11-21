@@ -26,7 +26,7 @@
                 </a> 
                 <div class="mx-3 mb-3 flex justify-between gap-2">
                     <a href="/film/{{$movie->id}}/modifier" class="text-sm bg-gray-500 px-2 py-1 text-gray-200 w-1/2 text-center">Modifier</a>
-                    <a href="/film/{{$movie->id}}/supprimer" class="text-sm bg-red-500 px-2 py-1 text-gray-200 w-1/2 text-center" onclick="return confirm("Êtes-vous sûr de vouloir supprimer le film {{$movie->title}} ?\")">Supprimer</a>
+                    <a href="/film/{{$movie->id}}/supprimer" class="text-sm bg-red-500 px-2 py-1 text-gray-200 w-1/2 text-center" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le film {{$movie->title}}')">Supprimer</a>
                 </div>
             </div>
         </div>    

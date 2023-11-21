@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class MovieController extends Controller
 {
@@ -16,14 +18,14 @@ class MovieController extends Controller
             //'films' => Movie::all(), //Afficher tous les films 
             'films' => Movie::with('category')->get(), //La ligne ci-dessus fonctionne aussi mais est moins optimisée
         ]);
-        
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
         $idFilm = collect(Movie::all())->pluck('id')->all();
 
-        if(! in_array($id, $idFilm)) {
+        if (!in_array($id, $idFilm)) {
             abort(404); // Renvoie une 404
         }
 
@@ -32,9 +34,8 @@ class MovieController extends Controller
         //Les lignes ci-dessus peuvent être remplacées par :
         //$filmFound = Movie::findOrFail($id);
         //Si on trouve l'id, on affecte le tableau à $filmFound, sinon on fait abort(404);
-   
-        return view('movies/show', ['movie' => $filmFound]);
 
+        return view('movies/show', ['movie' => $filmFound]);
     }
 
     public function create()
@@ -55,7 +56,7 @@ class MovieController extends Controller
             'released_at' => 'nullable|date', //par défaut = nullable, donc pas obligé de le préciser
             'category' => 'nullable|exists:categories,id', //va vérifier que l'id dans categories existe
         ]);
-        
+
         //Insertion en BDD
         $movie = new Movie();
         $movie->title = $request->title; //title : on peut mettre à la place input('title', 'valeur par défaut')
@@ -75,11 +76,13 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($id);
 
+        // On autorise la modif du film si l'id de l'user correspond à l'user_id associé dans la table pour ce film
+        Gate::allowIf($movie->user_id == Auth::user()->id);
+
         return view('movies/edit', [
             'categories' => Category::all()->sortBy('name'),
             'movie' => $movie,
         ]);
-
     }
 
     public function update(Request $request, $id)
@@ -89,10 +92,10 @@ class MovieController extends Controller
             'title' => 'required|min:2',
             'synopsis' => 'required|min:10',
             'duration' => 'required|integer|min:1',
-            'released_at' => 'nullable|date', 
-            'category' => 'nullable|exists:categories,id', 
+            'released_at' => 'nullable|date',
+            'category' => 'nullable|exists:categories,id',
         ]);
-        
+
         //Insertion en BDD
         $movie = Movie::findOrFail($id); //Ici on va modifier le film
         $movie->title = $request->title; //title : on peut mettre à la place input('title', 'valeur par défaut')
@@ -110,8 +113,12 @@ class MovieController extends Controller
 
     public function destroy($id)
     {
+        //Ces deux lignes ci-dessous ont été ajoutés car on teste si l'user a l'autorisation de supprimer le film
+        $movie = Movie::findOrFail($id); //On récupére l'id de film à supprimer
+        Gate::allowIf($movie->user_id == Auth::user()->id); //On autorise la suppression du film si l'id de l'user correspond à l'user_id associé dans la table pour ce film
+
         Movie::destroy($id); //DELETE FROM movies WHERE id...
- 
+
         return redirect('/films');
     }
 }

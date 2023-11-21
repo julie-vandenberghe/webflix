@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'julie@julie.com',
         ]);
 
+        User::factory()->create([
+            'email' => 'juju@julie.com',
+        ]);
+
         //SANS L'API
         // Category::factory(10)->create();
         // Category::factory()->create(['name' => 'Action']);
@@ -68,6 +72,7 @@ class DatabaseSeeder extends Seeder
                 'released_at' => $movie['release_date'], 
                 'youtube' => $movie['videos']['results'][0]['key'] ?? null,
                 'category_id' => $movie['genres'][0]['id'] ?? null,
+                'user_id' => User::all()->random(), // Cela attribue un user aléatoire (préalablement créé)
             ]);
 
         };
