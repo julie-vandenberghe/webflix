@@ -53,3 +53,6 @@ Route::get('/films', [MovieController::class, 'index']);
 Route::get('/film/{id}', [MovieController::class, 'show']); //Attention, si met un 's' pas moyen de distinguer avec ligne du dessous et va croire que films/creer = films/{id} ou alors rajouter ->whereNumber('id) à la fin de la ligne)
 Route::get('/films/creer', [MovieController::class, 'create']); // pour afficher le formulaire
 Route::post('/films/creer', [MovieController::class, 'store']); // pour traiter le formulaire
+Route::get('/film/{id}/modifier', [MovieController::class, 'edit']);
+Route::post('/film/{id}/modifier', [MovieController::class, 'update']);
+Route::get('/film/{id}/supprimer', [MovieController::class, 'destroy']);

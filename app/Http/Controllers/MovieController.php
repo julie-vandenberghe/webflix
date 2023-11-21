@@ -70,4 +70,15 @@ class MovieController extends Controller
 
         return redirect('/films');
     }
+
+    public function edit($id)
+    {
+        $movie = Movie::findOrFail($id);
+
+        return view('movies/edit', [
+            'categories' => Category::all()->sortBy('name'),
+            'movie' => $movie,
+        ]);
+
+    }
 }

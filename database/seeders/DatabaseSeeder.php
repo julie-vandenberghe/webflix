@@ -40,7 +40,13 @@ class DatabaseSeeder extends Seeder
 
 
         //Films
-        $movies = Http::withoutVerifying()->get($baseUrl.'/movie/now_playing?language=fr-FR&api_key='.$apiKey)->json('results'); 
+        $movies1 = Http::withoutVerifying()->get($baseUrl.'/movie/now_playing?language=fr-FR&api_key='.$apiKey)->json('results'); 
+
+        //Pour récupérer d'autres films (manière un peu moche, on aurait pu faire une boucle aussi)
+        $movies2 = Http::withoutVerifying()->get($baseUrl.'/movie/now_playing?language=fr-FR&page=2&api_key='.$apiKey)->json('results'); 
+
+        $movies = [...$movies1, ...$movies2]; // [1, 2, 3, 4] au lieu de [[1, 2], [3, 4]]
+
 
         foreach ($movies as $movie) {
             $movie = Http::withoutVerifying()
