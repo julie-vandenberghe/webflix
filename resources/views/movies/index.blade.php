@@ -9,20 +9,19 @@
 <div class="flex flex-wrap my-3">
     @foreach ($films as $movie)
         <div class="w-1/2 sm:w-1/3 lg:w-1/5">
-            <a href="/film/ {{$movie->cover}}" class="block m-3 group">
+            <a href="/film/{{$movie->id}}" class="block m-3 group">
                 <img class="w-full h-[300px] object-cover" src="{{ $movie->cover }}" alt="{{ $movie->title }}">
                 <h3 class="text-sm text-gray-600 underline group-hover:no-underline">{{ $movie->title }}</h3>
                 {{-- <p>{{ $movie->synopsis }}</p> --}}
                 <p>
                 @if ($movie->released_at)
-                {{ $movie->released_at->diffForHumans()}} | 
-                {{-- Permet d'avoir 3 weeks ago --}}
+                {{ $movie->released_at->diffForHumans()}} | {{-- Permet d'avoir 3 weeks ago --}}
                 {{ $movie->released_at->translatedFormat('d F Y') }} | 
                 @endif
                 @if ($movie->category_id)
-                {{ $movie->category_id }} | 
+                {{ $movie->category->name}} | {{-- Attention ! Ici, après category, on ne met pas de parenthèses car il s'agit d'une méthode magique --}}
                 @endif
-                {{ $movie->duration }}</p>
+                {{ $movie->duration() }}</p>
             </a> 
         </div>
     @endforeach

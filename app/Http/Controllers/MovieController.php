@@ -33,12 +33,8 @@ class MovieController extends Controller
         //$filmFound = Movie::findOrFail($id);
         //Si on trouve l'id, on affecte le tableau à $filmFound, sinon on fait abort(404);
    
-        return view('movies/show', [
-            'title' => $filmFound->title,
-            'synopsis' => $filmFound->synopsis,
-            'duration' => $filmFound->duration,
+        return view('movies/show', ['movie' => $filmFound]);
 
-        ]);
     }
 
     public function create()
